@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About · Shanthosh Reddy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#060a12; --surface:#0c1422; --surface2:#141e30;
+      --border:rgba(255,255,255,0.07);
+      --mint:#00dfa2; --sky:#38c8ff; --amber:#ffb830; --rose:#ff6b8a;
+      --text:#edf2f8; --muted:#4a5c78;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+    body {
+      font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;
+      background-image:radial-gradient(circle,rgba(255,255,255,0.055) 1px,transparent 1px);
+      background-size:40px 40px;
+    }
+    nav {
+      position:fixed; top:0; width:100%; z-index:100;
+      backdrop-filter:blur(20px) saturate(1.5); background:rgba(6,10,18,0.88);
+      border-bottom:1px solid var(--border); padding:1rem 3rem;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav-logo { font-family:'Space Mono',monospace; font-weight:700; font-size:1rem; color:var(--mint); text-decoration:none; letter-spacing:0.1em; }
+    .nav-links { display:flex; gap:2.5rem; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.88rem; font-weight:500; letter-spacing:0.04em; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a:hover,.nav-links a.active { color:var(--text); }
+    .nav-links a.active::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1.5px; background:var(--mint); border-radius:2px; }
+
+    .page { max-width:1100px; margin:0 auto; padding:8rem 3rem 5rem; position:relative; }
+
+    /* PAGE HEADER */
+    .page-header { position:relative; margin-bottom:5rem; overflow:hidden; }
+    .page-header-inner { position:relative; z-index:1; }
+    .label { font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.22em; color:var(--mint); text-transform:uppercase; margin-bottom:0.6rem; }
+    .page-title { font-size:clamp(3rem,6vw,5.5rem); font-weight:700; line-height:1; }
+    .page-title span { color:var(--mint); }
+    .page-title .out { -webkit-text-stroke:1.5px rgba(238,242,248,0.3); color:transparent; }
+
+    /* Decorative arc */
+    .deco-arc {
+      position:absolute; right:-60px; top:-80px; width:420px; height:420px;
+      pointer-events:none; opacity:0.2;
+    }
+
+    /* BIO */
+    .bio-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; margin-bottom:5rem; }
+    .bio-text p { color:#7a8fa8; line-height:1.85; margin-bottom:1.25rem; font-size:1rem; }
+    .bio-text p strong { color:var(--text); }
+    .bio-text p em { color:var(--mint); font-style:normal; }
+
+    .bio-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .stat {
+      background:var(--surface); border:1px solid var(--border); border-radius:0.85rem;
+      padding:1.4rem; text-align:center; transition:border-color 0.25s, transform 0.25s;
+    }
+    .stat:hover { border-color:rgba(0,223,162,0.3); transform:translateY(-3px); }
+    .stat-n {
+      font-family:'Space Mono',monospace; font-size:2rem; font-weight:700;
+      color:var(--mint); display:block; margin-bottom:0.2rem;
+    }
+    .stat-l { font-size:0.75rem; color:var(--muted); letter-spacing:0.05em; }
+
+    /* EDUCATION */
+    .section-label { font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; color:var(--mint); text-transform:uppercase; margin-bottom:1.75rem; }
+    .section-title-sm { font-size:clamp(1.8rem,3vw,2.5rem); font-weight:700; margin-bottom:2rem; }
+
+    .edu-list { display:flex; flex-direction:column; gap:1rem; margin-bottom:4rem; }
+    .edu-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:1rem;
+      padding:1.75rem 2rem; display:flex; gap:1.5rem; align-items:flex-start;
+      transition:border-color 0.25s, transform 0.25s;
+    }
+    .edu-card:hover { border-color:rgba(56,200,255,0.3); transform:translateX(4px); }
+    .edu-icon {
+      width:46px; height:46px; border-radius:0.75rem; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+    }
+    .ic-1 { background:linear-gradient(135deg,rgba(0,223,162,0.2),rgba(56,200,255,0.2)); }
+    .ic-2 { background:linear-gradient(135deg,rgba(56,200,255,0.2),rgba(124,58,237,0.2)); }
+    .ic-3 { background:linear-gradient(135deg,rgba(255,184,48,0.2),rgba(255,107,138,0.2)); }
+    .edu-degree { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:0.2rem; }
+    .edu-school { font-size:0.88rem; color:var(--sky); margin-bottom:0.2rem; }
+    .edu-meta { font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--muted); }
+
+    /* HONORS */
+    .honors { display:flex; flex-wrap:wrap; gap:1rem; }
+    .honor {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(255,184,48,0.08); border:1px solid rgba(255,184,48,0.25);
+      border-radius:2rem; padding:0.5rem 1.2rem;
+      font-size:0.85rem; color:var(--amber); font-weight:500;
+    }
+
+    footer {
+      border-top:1px solid var(--border); padding:1.5rem 3rem;
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1100px; margin:0 auto;
+      font-size:0.76rem; color:var(--muted); font-family:'Space Mono',monospace;
+    }
+    footer a { color:var(--mint); text-decoration:none; }
+
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease,transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem;} .nav-links{gap:1.2rem;}
+      .page{padding:6rem 1.5rem 4rem;}
+      .bio-grid{grid-template-columns:1fr; gap:2.5rem;}
+      .bio-stats{grid-template-columns:1fr 1fr;}
+      .deco-arc{width:240px; height:240px; right:-30px; top:-40px;}
+      footer{padding:1.5rem; flex-direction:column; gap:0.5rem; text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">SRGR/</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+    <a href="experience.html">Experience</a>
+    <a href="skills.html">Skills</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header reveal">
+    <div class="page-header-inner">
+      <div class="label">01 / About</div>
+      <h1 class="page-title">
+        <span>Who</span> I <span class="out">Am</span>
+      </h1>
+    </div>
+    <svg class="deco-arc" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="210" cy="210" r="190" fill="none" stroke="#00dfa2" stroke-width="1" stroke-dasharray="8 18">
+        <animateTransform attributeName="transform" type="rotate" from="0 210 210" to="360 210 210" dur="50s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="210" cy="210" r="140" fill="none" stroke="#38c8ff" stroke-width="1" opacity="0.7">
+        <animateTransform attributeName="transform" type="rotate" from="360 210 210" to="0 210 210" dur="35s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="210" cy="210" r="80" fill="none" stroke="#ffb830" stroke-width="1" stroke-dasharray="4 12" opacity="0.8">
+        <animateTransform attributeName="transform" type="rotate" from="0 210 210" to="360 210 210" dur="20s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+
+  <!-- BIO -->
+  <div class="bio-grid">
+    <div class="bio-text reveal">
+      <p>
+        I'm <strong>Shanthosh Reddy Gollapalli Raghunatha</strong> — an engineer, product thinker, and builder based in <em>Farmington, Michigan</em>. I hold an <strong>M.S. in Management Information Systems</strong> from the University of Illinois Springfield (Beta Gamma Sigma, Chicoine Scholar) and a <strong>B.S. in Computer Engineering</strong> from the Milwaukee School of Engineering.
+      </p>
+      <p>
+        At <strong>Visteon Corporation</strong>, I work as a Senior Engineer on next-generation cockpit electronics — applying <strong>AI/ML models and algorithms</strong> to develop In-Vehicle AI Assistants, ADAS, Driver Monitoring Systems (DMS), and Surround View Monitor (SVM) systems on Android Automotive platforms.
+      </p>
+      <p>
+        My career has taken me from building <strong>serverless cloud functions</strong> and Stripe payment integrations at a startup, to managing <strong>enterprise IT operations</strong> at a municipal utility district, to professional software engineering and product strategy at scale. I thrive where deep technical work meets real business outcomes.
+      </p>
+      <p>
+        Key interests: <em>Artificial Intelligence</em> · <em>Automotive Technology</em> · <em>Data Science</em> · <em>Software Development</em>
+      </p>
+    </div>
+    <div class="bio-stats reveal">
+      <div class="stat"><span class="stat-n">7+</span><div class="stat-l">Roles & Positions</div></div>
+      <div class="stat"><span class="stat-n">MS</span><div class="stat-l">Mgmt Info Systems · UIS</div></div>
+      <div class="stat"><span class="stat-n">BS</span><div class="stat-l">Computer Engineering · MSOE</div></div>
+      <div class="stat"><span class="stat-n">4+</span><div class="stat-l">Industries</div></div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="reveal">
+    <div class="section-label">Education</div>
+    <div class="edu-list">
+      <div class="edu-card">
+        <div class="edu-icon ic-1">🎓</div>
+        <div>
+          <div class="edu-degree">M.S. — Management Information Systems</div>
+          <div class="edu-school">University of Illinois Springfield</div>
+          <div class="edu-meta">Jan 2023 – May 2024 · Beta Gamma Sigma · Chicoine Scholarship</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon ic-2">🖥️</div>
+        <div>
+          <div class="edu-degree">B.S. — Computer Engineering</div>
+          <div class="edu-school">Milwaukee School of Engineering (MSOE)</div>
+          <div class="edu-meta">2017 – 2019 · Milwaukee, WI</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon ic-3">🏛️</div>
+        <div>
+          <div class="edu-degree">Computer Engineering (Transfer)</div>
+          <div class="edu-school">Manipal Institute of Technology</div>
+          <div class="edu-meta">2015 – 2017 · Manipal, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HONORS -->
+  <div class="reveal">
+    <div class="section-label">Honors & Awards</div>
+    <div class="honors">
+      <span class="honor">🏆 Beta Gamma Sigma</span>
+      <span class="honor">🎓 Chicoine Scholarship</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>Shanthosh Reddy Gollapalli Raghunatha</span>
+  <a href="experience.html">View Experience →</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

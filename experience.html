@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience · Shanthosh Reddy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#060a12; --surface:#0c1422; --surface2:#141e30;
+      --border:rgba(255,255,255,0.07);
+      --mint:#00dfa2; --sky:#38c8ff; --amber:#ffb830; --rose:#ff6b8a;
+      --text:#edf2f8; --muted:#4a5c78;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;} html{scroll-behavior:smooth;}
+    body {
+      font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden;
+      background-image:radial-gradient(circle,rgba(255,255,255,0.055) 1px,transparent 1px);
+      background-size:40px 40px;
+    }
+    nav {
+      position:fixed; top:0; width:100%; z-index:100;
+      backdrop-filter:blur(20px) saturate(1.5); background:rgba(6,10,18,0.88);
+      border-bottom:1px solid var(--border); padding:1rem 3rem;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .nav-logo { font-family:'Space Mono',monospace; font-weight:700; font-size:1rem; color:var(--mint); text-decoration:none; letter-spacing:0.1em; }
+    .nav-links { display:flex; gap:2.5rem; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.88rem; font-weight:500; transition:color 0.25s; position:relative; padding-bottom:2px; }
+    .nav-links a:hover,.nav-links a.active { color:var(--text); }
+    .nav-links a.active::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:1.5px; background:var(--mint); border-radius:2px; }
+
+    .page { max-width:1100px; margin:0 auto; padding:8rem 3rem 5rem; }
+
+    .label { font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.22em; color:var(--mint); text-transform:uppercase; margin-bottom:0.6rem; }
+    .page-title { font-size:clamp(3rem,6vw,5.5rem); font-weight:700; line-height:1; margin-bottom:4rem; }
+    .page-title .out { -webkit-text-stroke:1.5px rgba(238,242,248,0.3); color:transparent; }
+    .page-title span { color:var(--mint); }
+
+    /* TIMELINE */
+    .timeline { position:relative; padding-left:2px; }
+    .timeline::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom,var(--mint),var(--sky),var(--amber),var(--rose),transparent);
+    }
+
+    .tl-item {
+      position:relative; padding-left:3rem; margin-bottom:3rem;
+      opacity:0; transform:translateX(-16px);
+      transition:opacity 0.6s ease,transform 0.6s ease;
+    }
+    .tl-item.visible { opacity:1; transform:translateX(0); }
+
+    .tl-dot {
+      position:absolute; left:-6px; top:0.4rem;
+      width:14px; height:14px; border-radius:50%; border:2px solid var(--bg);
+    }
+
+    .tl-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:1rem;
+      padding:1.75rem 2rem; transition:border-color 0.25s, transform 0.25s;
+    }
+    .tl-card:hover { transform:translateX(4px); }
+
+    .tl-top {
+      display:flex; justify-content:space-between; align-items:flex-start;
+      flex-wrap:wrap; gap:0.75rem; margin-bottom:0.75rem;
+    }
+    .tl-role { font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:0.2rem; }
+    .tl-company { font-size:0.88rem; font-weight:500; }
+    .tl-date { font-family:'Space Mono',monospace; font-size:0.72rem; color:var(--muted); white-space:nowrap; background:var(--surface2); padding:0.25rem 0.65rem; border-radius:0.3rem; }
+    .tl-desc { color:#7a8fa8; font-size:0.93rem; line-height:1.75; margin-bottom:0.85rem; }
+    .tl-tags { display:flex; flex-wrap:wrap; gap:0.4rem; }
+    .tag {
+      padding:0.25rem 0.7rem; border-radius:0.3rem;
+      font-size:0.68rem; font-family:'Space Mono',monospace; border:1px solid;
+    }
+    .t-mint { background:rgba(0,223,162,0.08); color:var(--mint); border-color:rgba(0,223,162,0.22); }
+    .t-sky  { background:rgba(56,200,255,0.08); color:var(--sky);  border-color:rgba(56,200,255,0.22); }
+    .t-amb  { background:rgba(255,184,48,0.08); color:var(--amber);border-color:rgba(255,184,48,0.22); }
+    .t-rose { background:rgba(255,107,138,0.08);color:var(--rose); border-color:rgba(255,107,138,0.22);}
+
+    footer {
+      border-top:1px solid var(--border); padding:1.5rem 3rem;
+      display:flex; justify-content:space-between; align-items:center;
+      max-width:1100px; margin:0 auto;
+      font-size:0.76rem; color:var(--muted); font-family:'Space Mono',monospace;
+    }
+    footer a { color:var(--mint); text-decoration:none; }
+
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem;} .nav-links{gap:1.2rem;}
+      .page{padding:6rem 1.5rem 4rem;}
+      .tl-top{flex-direction:column;}
+      footer{padding:1.5rem; flex-direction:column; gap:0.5rem; text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">SRGR/</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="experience.html" class="active">Experience</a>
+    <a href="skills.html">Skills</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="label">02 / Experience</div>
+  <h1 class="page-title">Where I've <span class="out">Worked</span></h1>
+
+  <div class="timeline">
+
+    <!-- Visteon -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--mint);box-shadow:0 0 12px rgba(0,223,162,0.5);"></div>
+      <div class="tl-card" style="border-color:rgba(0,223,162,0.15);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Sr Engineer — Cockpit Electronics</div>
+            <div class="tl-company" style="color:var(--mint);">Visteon Corporation · Van Buren, MI</div>
+          </div>
+          <div class="tl-date">Sep 2024 – Present</div>
+        </div>
+        <p class="tl-desc">
+          Lead engineering on next-generation automotive cockpit systems. Apply <strong style="color:var(--text);">AI/ML models and algorithms</strong> to develop In-Vehicle AI Assistants, ADAS, Driver Monitoring Systems (DMS), and Surround View Monitor (SVM) products. Work across the full product lifecycle — concept through deployment — on <strong style="color:var(--text);">Android Automotive</strong> platforms, driving cockpit HMI innovation with cross-functional teams.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-mint">AI / ML</span>
+          <span class="tag t-sky">Android Automotive</span>
+          <span class="tag t-amb">ADAS · DMS · SVM</span>
+          <span class="tag t-rose">Product Management</span>
+          <span class="tag t-mint">Cockpit HMI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- UIS Intern -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--sky);box-shadow:0 0 10px rgba(56,200,255,0.5);"></div>
+      <div class="tl-card" style="border-color:rgba(56,200,255,0.15);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Software Developer Intern</div>
+            <div class="tl-company" style="color:var(--sky);">University of Illinois Springfield</div>
+          </div>
+          <div class="tl-date">Aug 2023 – Dec 2023</div>
+        </div>
+        <p class="tl-desc">
+          Contributed to software development and data engineering projects within the university research environment during M.S. studies. Applied Python and data tooling to support research and analytical initiatives.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-sky">Python</span>
+          <span class="tag t-mint">Data Engineering</span>
+          <span class="tag t-amb">Research</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARi -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--amber);box-shadow:0 0 10px rgba(255,184,48,0.5);"></div>
+      <div class="tl-card" style="border-color:rgba(255,184,48,0.15);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Software Engineer</div>
+            <div class="tl-company" style="color:var(--amber);">ARi · Peoria, IL</div>
+          </div>
+          <div class="tl-date">May 2022 – Jan 2023</div>
+        </div>
+        <p class="tl-desc">
+          Worked as a software engineer in a professional engineering services firm. Contributed to software design, development, testing, and integration across the development lifecycle.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-amb">Software Engineering</span>
+          <span class="tag t-sky">Full-Stack</span>
+          <span class="tag t-mint">Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deluxe -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--rose);box-shadow:0 0 10px rgba(255,107,138,0.5);"></div>
+      <div class="tl-card" style="border-color:rgba(255,107,138,0.15);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Technical Product Analyst I</div>
+            <div class="tl-company" style="color:var(--rose);">Deluxe Corporation · Wausau, WI</div>
+          </div>
+          <div class="tl-date">Sep 2020 – May 2022</div>
+        </div>
+        <p class="tl-desc">
+          Supported enterprise IT operations and product reliability for the RDC application suite. Installed drivers and hotfixes, conducted patch testing and validation, and maintained <strong style="color:var(--text);">SQL databases</strong> for data integrity and system continuity across client environments.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-rose">SQL</span>
+          <span class="tag t-mint">Patch Testing</span>
+          <span class="tag t-sky">RDC Application</span>
+          <span class="tag t-amb">IT Operations</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resolve TOK -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:#a78bfa;box-shadow:0 0 10px rgba(167,139,250,0.5);"></div>
+      <div class="tl-card" style="border-color:rgba(167,139,250,0.15);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">Software Developer Intern</div>
+            <div class="tl-company" style="color:#a78bfa;">Resolve TOK Inc. · Columbus, OH</div>
+          </div>
+          <div class="tl-date">Mar 2020 – Sep 2020</div>
+        </div>
+        <p class="tl-desc">
+          Built serverless backend features using <strong style="color:var(--text);">Google Cloud Functions</strong> and Python. Implemented CRUD operations and integrated <strong style="color:var(--text);">Stripe payment processing</strong>. Developed frontend functionality with JavaScript and Node.js, and engineered an auto-alignment algorithm for dynamic image album layouts.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-mint">Google Cloud</span>
+          <span class="tag t-sky">Python</span>
+          <span class="tag t-amb">Node.js</span>
+          <span class="tag t-rose">Stripe API</span>
+          <span class="tag t-mint">JavaScript</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MMSD -->
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--amber);box-shadow:0 0 8px rgba(255,184,48,0.4);"></div>
+      <div class="tl-card" style="border-color:rgba(255,184,48,0.12);">
+        <div class="tl-top">
+          <div>
+            <div class="tl-role">IT Operations Intern</div>
+            <div class="tl-company" style="color:var(--amber);">Milwaukee Metropolitan Sewerage District</div>
+          </div>
+          <div class="tl-date">Jun 2019 – Aug 2019</div>
+        </div>
+        <p class="tl-desc">
+          Managed enterprise endpoint deployments via <strong style="color:var(--text);">SCCM</strong>, administered user accounts and policies with <strong style="color:var(--text);">Active Directory</strong>, and automated IT workflows with PowerShell scripts. Supported helpdesk operations and hardware provisioning.
+        </p>
+        <div class="tl-tags">
+          <span class="tag t-amb">SCCM</span>
+          <span class="tag t-sky">Active Directory</span>
+          <span class="tag t-mint">PowerShell</span>
+          <span class="tag t-rose">Endpoint Mgmt</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>Shanthosh Reddy Gollapalli Raghunatha</span>
+  <a href="skills.html">View Skills →</a>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*80); });
+  },{threshold:0.08});
+  document.querySelectorAll('.tl-item').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
